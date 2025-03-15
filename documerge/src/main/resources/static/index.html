@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Document Editor</title>
+    <script>
+        async function register() {
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const response = await fetch('/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            if (response.ok) {
+                alert('Registration successful! Please login.');
+            } else {
+                alert('Registration failed');
+            }
+        }
+
+        async function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('collabSection').style.display = 'block';
+            } else {
+                alert('Login failed');
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('token');
+            document.getElementById('authSection').style.display = 'block';
+            document.getElementById('collabSection').style.display = 'none';
+        }
+
+        async function fetchCollaborators() {
+            const documentId = document.getElementById('documentId').value;
+            const response = await fetch(`/collaboration/list/${documentId}`);
+            const collaborators = await response.json();
+            const tableBody = document.getElementById('collaboratorTableBody');
+            tableBody.innerHTML = '';
+            collaborators.forEach(collab => {
+                tableBody.innerHTML += `<tr>
+                    <td>${collab.email}</td>
+                    <td>
+                        <select onchange="updateRole('${collab.email}', this.value)">
+                            <option value="view" ${collab.role === 'view' ? 'selected' : ''}>View</option>
+                            <option value="edit" ${collab.role === 'edit' ? 'selected' : ''}>Edit</option>
+                        </select>
+                    </td>
+                    <td><button onclick="removeCollaborator('${collab.email}')">Remove</button></td>
+                </tr>`;
+            });
+        }
+
+        async function inviteCollaborator() {
+            const email = document.getElementById('email').value;
+            const documentId = document.getElementById('documentId').value;
+            const role = document.getElementById('role').value;
+            await fetch(`/collaboration/invite?email=${email}&documentId=${documentId}&role=${role}`, {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
+            });
+            fetchCollaborators();
+        }
+
+        async function removeCollaborator(email) {
+            const documentId = document.getElementById('documentId').value;
+            await fetch(`/collaboration/remove?email=${email}&documentId=${documentId}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
+            });
+            fetchCollaborators();
+        }
+
+        async function updateRole(email, role) {
+            const documentId = document.getElementById('documentId').value;
+            await fetch(`/collaboration/update-role?email=${email}&documentId=${documentId}&role=${role}`, {
+                method: 'PUT',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
+            });
+            fetchCollaborators();
+        }
+    </script>
+</head>
+<body>
+    <div id="authSection">
+        <h2>Register</h2>
+        <input type="text" id="registerEmail" placeholder="Email">
+        <input type="password" id="registerPassword" placeholder="Password">
+        <button onclick="register()">Register</button>
+
+        <h2>Login</h2>
+        <input type="text" id="loginEmail" placeholder="Email">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="collabSection" style="display: none;">
+        <button onclick="logout()">Logout</button>
+        <h2>Manage Collaborators</h2>
+        <input type="text" id="documentId" placeholder="Document ID" oninput="fetchCollaborators()">
+        <input type="text" id="email" placeholder="Collaborator Email">
+        <select id="role">
+            <option value="view">View</option>
+            <option value="edit">Edit</option>
+        </select>
+        <button onclick="inviteCollaborator()">Invite</button>
+
+        <h3>Collaborators</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="collaboratorTableBody"></tbody>
+        </table>
+    </div>
+</body>
+</html>
