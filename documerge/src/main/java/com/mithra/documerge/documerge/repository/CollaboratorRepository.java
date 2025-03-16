@@ -5,7 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CollaboratorRepository extends JpaRepository<Collaborator, Long> {
-    List<Collaborator> findByDocumentId(Long documentId);
+    List<Collaborator> findByDocumentId(String documentId);
     Collaborator findByEmailAndDocumentId(String email, String documentId);
     Collaborator findByDocumentIdAndEmail(Long documentId, String email);
+    List<Collaborator> findByDocumentId(Long documentId);
 }
