@@ -1,7 +1,7 @@
-package com.example.collabdoc.service;
+package com.mithra.documerge.documerge.service;
 
-import com.example.collabdoc.model.User;
-import com.example.collabdoc.repository.UserRepository;
+import com.mithra.documerge.documerge.model.User;
+import com.mithra.documerge.documerge.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

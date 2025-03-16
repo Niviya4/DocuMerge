@@ -1,7 +1,7 @@
-package com.example.collabdoc.controller;
+package com.mithra.documerge.documerge.controller;
 
-import com.example.collabdoc.model.Document;
-import com.example.collabdoc.service.DocumentService;
+import com.mithra.documerge.documerge.model.Document;
+import com.mithra.documerge.documerge.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

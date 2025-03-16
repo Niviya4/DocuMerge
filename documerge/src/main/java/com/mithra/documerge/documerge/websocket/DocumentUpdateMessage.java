@@ -1,4 +1,4 @@
-package com.example.collabdoc.websocket;
+package com.mithra.documerge.documerge.websocket;
 
 import lombok.Data;
 

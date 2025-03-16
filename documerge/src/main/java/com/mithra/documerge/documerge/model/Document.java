@@ -1,4 +1,4 @@
-package com.example.collabdoc.model;
+package com.mithra.documerge.documerge.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

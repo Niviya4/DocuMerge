@@ -1,8 +1,8 @@
-package com.example.collabdoc.service;
+package com.mithra.documerge.documerge.service;
 
-import com.example.collabdoc.model.Document;
-import com.example.collabdoc.model.DocumentVersion;
-import com.example.collabdoc.repository.DocumentRepository;
+import com.mithra.documerge.documerge.model.Document;
+import com.mithra.documerge.documerge.model.DocumentVersion;
+import com.mithra.documerge.documerge.repository.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Date;

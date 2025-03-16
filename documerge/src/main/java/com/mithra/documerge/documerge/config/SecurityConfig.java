@@ -1,4 +1,4 @@
-package com.example.collabdoc.config;
+package com.mithra.documerge.documerge.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

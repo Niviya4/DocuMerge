@@ -1,6 +1,6 @@
-package com.example.collabdoc.repository;
+package com.mithra.documerge.documerge.repository;
 
-import com.example.collabdoc.model.User;
+import com.mithra.documerge.documerge.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
