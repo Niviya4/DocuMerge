@@ -40,4 +40,19 @@ public class Collaborator {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public void setDocument(Document document) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setDocument'");
+    }
+
+    public void setEmail(String email2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
+    }
+
+    public void setAccessLevel(String accessLevel) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAccessLevel'");
+    }
 }
