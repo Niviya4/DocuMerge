@@ -55,8 +55,8 @@
                     <td>${collab.email}</td>
                     <td>
                         <select onchange="updateRole('${collab.email}', this.value)">
-                            <option value="view" ${collab.role === 'view' ? 'selected' : ''}>View</option>
-                            <option value="edit" ${collab.role === 'edit' ? 'selected' : ''}>Edit</option>
+                            <option value="view" ${collab.role == 'view' ? 'selected' : ''}>View</option>
+                            <option value="edit" ${collab.role == 'edit' ? 'selected' : ''}>Edit</option>
                         </select>
                     </td>
                     <td><button onclick="removeCollaborator('${collab.email}')">Remove</button></td>
