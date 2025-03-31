@@ -1,5 +1,6 @@
 package com.mithra.documerge.documerge.controller;
 
+import com.mithra.documerge.documerge.dto.RegisterRequest;
 import com.mithra.documerge.documerge.model.User;
 import com.mithra.documerge.documerge.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestParam String email, @RequestParam String password, @RequestParam String role) {
-        authService.registerUser(email, password, role);
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+        authService.registerUser(request.getEmail(), request.getPassword(), request.getRole());
         return ResponseEntity.ok("User registered successfully");
     }
 
