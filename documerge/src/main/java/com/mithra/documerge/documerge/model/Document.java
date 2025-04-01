@@ -23,17 +23,17 @@ public class Document {
     public Document() {}
 
     // Getters and Setters
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    //public String getTitle() { return title; }
+    //public void setTitle(String title) { this.title = title; }
 
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
+    //public String getContent() { return content; }
+    //public void setContent(String content) { this.content = content; }
 
-    public String getOwnerEmail() { return ownerEmail; }
-    public void setOwnerEmail(String ownerEmail) { this.ownerEmail = ownerEmail; }
+    //public String getOwnerEmail() { return ownerEmail; }
+    //public void setOwnerEmail(String ownerEmail) { this.ownerEmail = ownerEmail; }
 
-    public Date getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+    //public Date getCreatedAt() { return createdAt; }
+    //public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
 
     @OneToMany(mappedBy = "document", cascade = CascadeType.ALL)
